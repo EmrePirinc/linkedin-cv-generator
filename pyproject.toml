@@ -1,0 +1,29 @@
+[project]
+name = "cv-generator"
+version = "2.0.0"
+description = "LinkedIn CV Generator - Fotoğraf/PDF'den otomatik ATS uyumlu CV"
+requires-python = ">=3.11"
+dependencies = [
+    "pdfplumber>=0.11.0",
+    "requests>=2.31.0",
+    "python-dotenv>=1.0.0",
+    "jinja2>=3.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
+[project.scripts]
+cv-generator = "cv_generator.main:main"
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["cv_generator*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
