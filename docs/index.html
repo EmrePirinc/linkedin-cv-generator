@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emre Pirinç - CV İndirme</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            max-width: 700px;
+            width: 100%;
+            padding: 2rem;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+        }
+        .card .icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.75rem;
+        }
+        .card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            margin-bottom: 0.35rem;
+        }
+        .card p {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            line-height: 1.4;
+        }
+        .card .badge {
+            display: inline-block;
+            margin-top: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            background: #1e3a5f;
+            color: #60a5fa;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #475569;
+            font-size: 0.8rem;
+        }
+        .footer a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        @media (max-width: 500px) {
+            .cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Emre Pirinc - CV</h1>
+            <p>Aspiring AI Engineer | SAP B1 Consultant</p>
+        </div>
+        <div class="cards">
+            <a class="card" href="cv_tr.pdf" download>
+                <div class="icon">📄</div>
+                <h3>Turkce Genel CV</h3>
+                <p>Tum deneyim ve yetenekleri iceren genel CV</p>
+                <span class="badge">PDF</span>
+            </a>
+            <a class="card" href="cv_en.pdf" download>
+                <div class="icon">🌍</div>
+                <h3>English CV</h3>
+                <p>General CV with all experience and skills</p>
+                <span class="badge">PDF</span>
+            </a>
+            <a class="card" href="cv_tr_sap.pdf" download>
+                <div class="icon">💼</div>
+                <h3>SAP B1 CV</h3>
+                <p>SAP Business One danismanligina ozel CV</p>
+                <span class="badge">SAP</span>
+            </a>
+            <a class="card" href="cv_tr_ai.pdf" download>
+                <div class="icon">🤖</div>
+                <h3>AI Engineer CV</h3>
+                <p>Yapay Zeka Muhendisligine ozel CV</p>
+                <span class="badge">AI</span>
+            </a>
+        </div>
+        <div class="footer">
+            <p><a href="https://linkedin.com/in/emre-pirinc">LinkedIn</a> · <a href="https://github.com/EmrePirinc">GitHub</a></p>
+        </div>
+    </div>
+</body>
+</html>
