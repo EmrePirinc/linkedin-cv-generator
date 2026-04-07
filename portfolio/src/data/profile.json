@@ -1,0 +1,28 @@
+{
+  "name": "Emre Pirinç",
+  "headline": "AI Researcher | SAP B1 Consultant | Enterprise AI Solutions | SAP Joule AI | MIS Graduate",
+  "location": "İstanbul, Türkiye",
+  "email": "info@1takimstartuplar.com",
+  "phone": "05345905889",
+  "linkedin": "https://www.linkedin.com/in/emre-pirinc",
+  "about": "Sakarya Üniversitesi Yönetim Bilişim Sistemleri mezunuyum. SAP Business One Uygulama Danışmanlığı alanında stajyerlik sürecimin ardından aktif projelerde görev alarak toplam 1 yıllık uçtan uca SAP B1 danışmanlığı deneyimi kazandım. Kariyerime Yapay Zeka Mühendisliği ve AI Danışmanlığı alanında devam etmek istiyorum.",
+  "skills": ["SAP Business One", "SAP ERP", "Crystal Reports", "SQL", "Python", "Microsoft Excel", "Project Management", "Business Analysis", "Artificial Intelligence", "Machine Learning", "LLM", "Data Science", "Scrum", "Figma", "HTML", "CSS", "Blockchain", "Prompt Engineering"],
+  "experiences": [
+    {"title": "1 Takım Start Uplar", "role": "Co-Founder", "period": "Şubat 2026 - Devam Ediyor", "description": "Kendi arkadaş çevrem ile kurmuş olduğum ekibimde projeler yapmakta, startup yarışmalarına katılmakta, haftalık ve aylık toplantılar ile proje toplantıları yapmaktayız."},
+    {"title": "AIFTeam | SAP Business One Certified Partner", "role": "HERO Ürün Danışmanı", "period": "Ocak 2026 - Şubat 2026", "description": "Hero projesinde HMR ve PM modülleri ile mobil uygulamaları içeren entegre portalın uçtan uca süreç yönetimi."},
+    {"title": "AIFTeam | SAP Business One Certified Partner", "role": "SAP B1 Consultant", "period": "Temmuz 2025 - Şubat 2026", "description": "SAP Business One danışmanlık süreçlerinde analiz, tasarım, geliştirme ve canlıya geçiş aşamalarının uçtan uca yönetimi."},
+    {"title": "Seratu Medya", "role": "Intern", "period": "Temmuz 2024 - Eylül 2024", "description": "Bilişim ve Teknoloji Tasarım kitaplarının scratch robotik kodlama içeriklerini hazırlama. Stable Diffusion ile AI destekli içerik üretimi."}
+  ],
+  "projects": [
+    {"title": "TÜBİTAK 2209-A: Yapay Zeka Bağımlığı Ve Korkuları", "period": "Kasım 2023 - Devam Ediyor", "description": "Sakarya Üniversitesi ile TÜBİTAK destekli araştırma projesi."},
+    {"title": "Anadolu Bakır SAP B1 Canlı Geçiş", "period": "Temmuz 2025 - Şubat 2026", "description": "AIFTeam ile SAP Business One canlı geçiş projesi."},
+    {"title": "QDMS Kalite Yönetim Sistemi", "period": "Kasım 2024 - Aralık 2024", "description": "ISO 9001 standartlarına uygun kalite yönetim sistemi geliştirme."},
+    {"title": "SMA'YA IŞIK TUT", "period": "Ocak 2024 - Haziran 2024", "description": "Farkındalık amaçlayan mobil uygulama teorik çalışması."},
+    {"title": "E-Park: Akıllı Otopark", "period": "Ocak 2021 - Haziran 2021", "description": "Plaka tanıma ve Blockchain destekli akıllı otopark sistemi."}
+  ],
+  "education": [
+    {"school": "Sakarya Üniversitesi", "degree": "Lisans, Yönetim Bilişim Sistemleri", "period": "2021 - 2025", "gpa": "3.27"},
+    {"school": "İstanbul Üniversitesi", "degree": "Associate's Degree, Computer Programming", "period": "2025 - 2027"},
+    {"school": "İzmir Bakırçay Üniversitesi", "degree": "Lisans, Yönetim Bilişim Sistemleri", "period": "2019 - 2021"}
+  ]
+}
