@@ -3,6 +3,38 @@ LaTeX Şablon Motoru
 
 LinkedIn profil verisini LaTeX şablonuna doldurur ve PDF derler.
 Hem Türkçe hem İngilizce CV üretir.
+
+== CV OPTİMİZASYON KURALLARI ==
+Bu motor aşağıdaki kurallara göre CV üretir:
+
+FORMAT:
+- Maks 2 sayfa, tek sütun, Helvetica 8pt
+- Boşluklar: titlespacing 7pt/3pt, vspace 3pt, parskip 1pt
+- Grafik/ikon/tablo/fotoğraf YOK (ATS uyumlu)
+- XeLaTeX ile derleme (UTF-8 Unicode)
+
+BÖLÜM BAŞLIKLARI:
+- Türkçe: HAKKIMDA (ÖN YAZI değil!), YETENEKLER, İŞ DENEYİMİ, PROJELER, EĞİTİM,
+  LİSANSLAR VE SERTİFİKALAR, ONUR VE ÖDÜLLER, DİLLER, REFERANSLAR
+- İngilizce: ABOUT ME (COVER LETTER değil!), SKILLS, WORK EXPERIENCE, PROJECTS,
+  EDUCATION, LICENSES AND CERTIFICATIONS, HONORS AND AWARDS, LANGUAGES, REFERENCES
+
+SIRALAMA:
+- Tüm bölümlerde TERS KRONOLOJİK (en güncel en üstte)
+- İş deneyimi, eğitim, projeler, sertifikalar hepsi bu kurala uyar
+
+ATS:
+- Telefon uluslararası format: +90 5XX XXX XX XX
+- LinkedIn/GitHub \href ile tıklanabilir
+- Sertifika doğrulama linki (Credly) eklenebilir
+- Standart bullet point (•), metin tabanlı PDF
+
+İÇERİK:
+- Bullet point'ler görev değil BAŞARI anlatır (rakamlarla)
+- "Uçtan uca" max 1 kez kullanılır
+- Kişisel özellikler yazılmaz (hobi, karakter vs.)
+- Eğitim geçişleri açıklanır (transfer, ön lisans nedeni)
+- Benzer ödüller tek paragrafta özetlenir
 """
 
 import subprocess
@@ -79,6 +111,30 @@ def generate_experience_block(exp: dict, lang: str = "tr") -> str:
     return "\n".join(lines)
 
 
+def sort_reverse_chronological(items: list, date_key: str = "start_date") -> list:
+    """Öğeleri ters kronolojik sıralar (en güncel en üstte).
+    'Devam Ediyor' / 'Present' olanlar en üste gelir."""
+    import re
+
+    def parse_date(item):
+        date_str = item.get(date_key, "") or item.get("date", "") or ""
+        # "Devam Ediyor" / "Present" en üstte
+        end = item.get("end_date", "")
+        if end and ("devam" in end.lower() or "present" in end.lower()):
+            return (9999, 12)
+        # Yıl ve ay çıkar
+        numbers = re.findall(r'\d+', date_str)
+        if len(numbers) >= 2:
+            year = int(numbers[-1]) if int(numbers[-1]) > 100 else int(numbers[0])
+            month = int(numbers[0]) if int(numbers[0]) <= 12 else 1
+            return (year, month)
+        elif len(numbers) == 1:
+            return (int(numbers[0]), 1)
+        return (0, 0)
+
+    return sorted(items, key=parse_date, reverse=True)
+
+
 def generate_latex(profile: dict, lang: str = "tr") -> str:
     """Profil verisinden tam LaTeX dosyası üretir."""
     
@@ -93,10 +149,10 @@ def generate_latex(profile: dict, lang: str = "tr") -> str:
 
 \setmainfont{Helvetica}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{0pt}
+\setlength{\parskip}{1pt}
 
 \titleformat{\section}{\normalsize\bfseries}{}{0em}{}[\titlerule]
-\titlespacing*{\section}{0pt}{3pt}{1pt}
+\titlespacing*{\section}{0pt}{7pt}{3pt}
 
 \setlist[itemize]{nosep, topsep=1pt, leftmargin=1.5em, label=\textbullet, itemsep=0pt, parsep=0pt}
 
@@ -116,19 +172,30 @@ def generate_latex(profile: dict, lang: str = "tr") -> str:
     contact_parts = [p for p in [location, email, phone] if p]
     contact_line = " | ".join(contact_parts)
     
+    # LinkedIn/GitHub tıklanabilir linkler
+    linkedin_display = linkedin.replace("https://", "").replace("http://", "")
+    linkedin_href = linkedin if linkedin.startswith("http") else f"https://{linkedin}"
+    github = profile.get("github_url", "")
+    github_display = github.replace("https://", "").replace("http://", "")
+    github_href = github if github.startswith("http") else f"https://{github}"
+
+    links_line = f"LinkedIn: \\href{{{linkedin_href}}}{{{linkedin_display}}}"
+    if github:
+        links_line += f" \\textbar{{}} GitHub: \\href{{{github_href}}}{{{github_display}}}"
+
     latex += f"""
 \\begin{{center}}
 {{\\Large\\bfseries {name}}}\\\\[2pt]
 {{\\small {headline}}}\\\\[2pt]
 {{\\small {contact_line}}}\\\\[1pt]
-{{\\small LinkedIn: {linkedin}}}
+{{\\small {links_line}}}
 \\end{{center}}
 
 \\vspace{{-2pt}}
 """
     
     # Ön yazı / Cover Letter
-    section_title = "ÖN YAZI" if lang == "tr" else "COVER LETTER"
+    section_title = "HAKKIMDA" if lang == "tr" else "ABOUT ME"
     about = escape_latex(profile.get("about", ""))
     if about:
         latex += f"""
@@ -148,7 +215,7 @@ def generate_latex(profile: dict, lang: str = "tr") -> str:
     
     # İş Deneyimi / Work Experience
     section_title = "İŞ DENEYİMİ" if lang == "tr" else "WORK EXPERIENCE"
-    experiences = profile.get("experiences", [])
+    experiences = sort_reverse_chronological(profile.get("experiences", []))
     if experiences:
         latex += f"\n\\section{{{section_title}}}\n"
         
@@ -163,33 +230,13 @@ def generate_latex(profile: dict, lang: str = "tr") -> str:
                 latex += f"{{\\small \\textit{{{exp.get('location', '')}}}}}\n"
                 current_parent = parent
             
-            latex += "\n\\vspace{0pt}\n"
+            latex += "\n\\vspace{3pt}\n"
             latex += generate_experience_block(exp, lang)
             latex += "\n"
     
-    # Eğitim / Education
-    section_title = "EĞİTİM" if lang == "tr" else "EDUCATION"
-    education = profile.get("education", [])
-    if education:
-        latex += f"\n\\section{{{section_title}}}\n"
-        for edu in education:
-            school = escape_latex(edu.get("school", ""))
-            degree = escape_latex(edu.get("degree", ""))
-            field = escape_latex(edu.get("field_of_study", ""))
-            dates = f"{edu.get('start_date', '')} -- {edu.get('end_date', '')}"
-            
-            latex += f"\n\\textbf{{{school}}} \\hfill {{\\small {dates}}}\\\\\n"
-            degree_parts = [p for p in [degree, field] if p]
-            degree_str = ", ".join(degree_parts)
-            if edu.get("grade"):
-                grade_label = "Not" if lang == "tr" else "GPA"
-                degree_str += f" -- {grade_label}: {edu['grade']}"
-            latex += f"{{\\small \\textit{{{degree_str}}}}}\n"
-            latex += "\n\\vspace{0pt}\n"
-    
-    # Projeler / Projects
+    # Projeler / Projects (Eğitim'den önce — sayfa bölünmesi riskini azaltır)
     section_title = "PROJELER" if lang == "tr" else "PROJECTS"
-    projects = profile.get("projects", [])
+    projects = sort_reverse_chronological(profile.get("projects", []))
     if projects:
         latex += f"\n\\section{{{section_title}}}\n"
         for proj in projects:
@@ -200,11 +247,33 @@ def generate_latex(profile: dict, lang: str = "tr") -> str:
             latex += f"\n\\textbf{{{title}}} \\hfill {{\\small {dates}}}\\\\\n"
             if desc:
                 latex += f"{{\\small {desc}}}\n"
-            latex += "\n\\vspace{0pt}\n"
+            latex += "\n\\vspace{3pt}\n"
     
+    # Eğitim / Education
+    section_title = "EĞİTİM" if lang == "tr" else "EDUCATION"
+    education = sort_reverse_chronological(profile.get("education", []))
+    if education:
+        latex += f"\n\\section{{{section_title}}}\n"
+        for edu in education:
+            school = escape_latex(edu.get("school", ""))
+            degree = escape_latex(edu.get("degree", ""))
+            field = escape_latex(edu.get("field_of_study", ""))
+            dates = f"{edu.get('start_date', '')} -- {edu.get('end_date', '')}"
+
+            latex += f"\n\\textbf{{{school}}} \\hfill {{\\small {dates}}}\\\\\n"
+            degree_parts = [p for p in [degree, field] if p]
+            degree_str = ", ".join(degree_parts)
+            if edu.get("grade"):
+                grade_label = "Not" if lang == "tr" else "GPA"
+                degree_str += f" -- {grade_label}: {edu['grade']}"
+            if edu.get("note"):
+                degree_str += f" -- {escape_latex(edu['note'])}"
+            latex += f"{{\\small \\textit{{{degree_str}}}}}\n"
+            latex += "\n\\vspace{3pt}\n"
+
     # Sertifikalar / Certifications
     section_title = "LİSANSLAR VE SERTİFİKALAR" if lang == "tr" else "LICENSES AND CERTIFICATIONS"
-    certs = profile.get("certifications", [])
+    certs = sort_reverse_chronological(profile.get("certifications", []), date_key="date")
     if certs:
         latex += f"\n\\section{{{section_title}}}\n{{\\small\n"
         for cert in certs:
@@ -248,6 +317,39 @@ def generate_latex(profile: dict, lang: str = "tr") -> str:
         latex += f"\n\\section{{{section_title}}}\n"
         latex += f"{{\\small {', '.join(lang_strs)}}}\n"
     
+    # Referanslar / References
+    section_title = "REFERANSLAR" if lang == "tr" else "REFERENCES"
+    references = profile.get("references", [])
+    if references:
+        latex += f"\n\\section{{{section_title}}}\n{{\\small\n"
+        for i, ref in enumerate(references):
+            name = escape_latex(ref.get("name", ""))
+            institution = escape_latex(ref.get("institution", ""))
+            department = escape_latex(ref.get("department", ""))
+            email = ref.get("email", "")
+            phone = ref.get("phone", "")
+
+            line = f"\\textbf{{{name}}}"
+            if institution:
+                line += f" -- {institution}"
+            if department:
+                line += f", {department}"
+            latex += line + "\\\\\n"
+
+            contact_parts = []
+            if email:
+                contact_parts.append(email)
+            if phone:
+                contact_parts.append(phone)
+            if contact_parts:
+                latex += " | ".join(contact_parts)
+
+            if i < len(references) - 1:
+                latex += "\\\\[3pt]\n"
+            else:
+                latex += "\n"
+        latex += "}\n"
+
     latex += "\n\\end{document}\n"
     return latex
 
