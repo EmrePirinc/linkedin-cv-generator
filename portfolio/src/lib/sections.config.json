@@ -1,0 +1,60 @@
+{
+  "sections": [
+    {
+      "id": "profile",
+      "label_tr": "Profil",
+      "label_en": "Profile",
+      "required": true,
+      "icon": "👤",
+      "hint": "İsim, başlık, konum ve bağlantı sayısının göründüğü üst profil ekranı"
+    },
+    {
+      "id": "about",
+      "label_tr": "Hakkında",
+      "label_en": "About",
+      "required": true,
+      "icon": "📝",
+      "hint": "\"Hakkında\" veya \"About\" başlığının altındaki paragraf metni"
+    },
+    {
+      "id": "experience",
+      "label_tr": "Deneyim",
+      "label_en": "Experience",
+      "required": true,
+      "icon": "💼",
+      "hint": "\"Deneyim\" veya \"Experience\" başlığı altındaki iş pozisyonları listesi"
+    },
+    {
+      "id": "education",
+      "label_tr": "Eğitim",
+      "label_en": "Education",
+      "required": true,
+      "icon": "🎓",
+      "hint": "\"Eğitim\" veya \"Education\" başlığı altındaki okul/üniversite bilgileri"
+    },
+    {
+      "id": "certifications",
+      "label_tr": "Sertifikalar",
+      "label_en": "Certifications",
+      "required": false,
+      "icon": "🏅",
+      "hint": "\"Lisanslar ve Sertifikalar\" veya \"Certifications\" bölümü (yoksa atlanır)"
+    },
+    {
+      "id": "projects",
+      "label_tr": "Projeler",
+      "label_en": "Projects",
+      "required": false,
+      "icon": "🚀",
+      "hint": "\"Projeler\" veya \"Projects\" başlığı altındaki proje listesi (yoksa atlanır)"
+    },
+    {
+      "id": "awards",
+      "label_tr": "Ödüller",
+      "label_en": "Awards",
+      "required": false,
+      "icon": "🏆",
+      "hint": "\"Onur ve Ödüller\" veya \"Honors & Awards\" bölümü (yoksa atlanır)"
+    }
+  ]
+}
