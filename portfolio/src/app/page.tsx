@@ -552,32 +552,14 @@ export default function Home() {
 
         {/* MEVCUT CV'LER */}
         <div className="bg-white rounded-2xl shadow-lg p-6">
-          <h2 className="text-base font-bold mb-1 text-gray-900">Mevcut CV&apos;ler</h2>
-          <p className="text-xs text-gray-500 mb-4">En son güncellenmiş CV&apos;leri buradan indirebilirsiniz.</p>
-          <div className="grid grid-cols-2 gap-3">
-            <a href="/cv_tr.pdf" download className="border-2 border-gray-200 rounded-xl p-4 hover:border-gray-900 transition group">
-              <p className="text-xl mb-1">📄</p>
-              <p className="font-semibold text-sm text-gray-900">Türkçe Genel CV</p>
-              <p className="text-xs text-gray-400 mt-0.5">Tüm deneyim ve yetenekler</p>
-              <span className="inline-block mt-2 px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-xs font-semibold">PDF</span>
-            </a>
-            <a href="/cv_en.pdf" download className="border-2 border-gray-200 rounded-xl p-4 hover:border-gray-900 transition group">
-              <p className="text-xl mb-1">🌍</p>
-              <p className="font-semibold text-sm text-gray-900">English CV</p>
-              <p className="text-xs text-gray-400 mt-0.5">General CV in English</p>
-              <span className="inline-block mt-2 px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-xs font-semibold">PDF</span>
-            </a>
-            <a href="/cv_tr_sap.pdf" download className="border-2 border-gray-200 rounded-xl p-4 hover:border-blue-600 transition group">
+          <h2 className="text-base font-bold mb-1 text-gray-900">Mevcut CV</h2>
+          <p className="text-xs text-gray-500 mb-4">En son güncellenmiş CV&apos;yi buradan indirebilirsiniz.</p>
+          <div className="grid grid-cols-1 gap-3">
+            <a href="/api/download?lang=sap" download className="border-2 border-gray-200 rounded-xl p-4 hover:border-blue-600 transition group">
               <p className="text-xl mb-1">💼</p>
               <p className="font-semibold text-sm text-gray-900">SAP B1 CV</p>
-              <p className="text-xs text-gray-400 mt-0.5">SAP Business One odaklı</p>
+              <p className="text-xs text-gray-400 mt-0.5">SAP Business One odaklı — 1 sayfa, ATS uyumlu</p>
               <span className="inline-block mt-2 px-2 py-0.5 bg-blue-50 text-blue-600 rounded text-xs font-semibold">SAP</span>
-            </a>
-            <a href="/cv_tr_ai.pdf" download className="border-2 border-gray-200 rounded-xl p-4 hover:border-purple-600 transition group">
-              <p className="text-xl mb-1">🤖</p>
-              <p className="font-semibold text-sm text-gray-900">AI Engineer CV</p>
-              <p className="text-xs text-gray-400 mt-0.5">Yapay Zeka Mühendisliği odaklı</p>
-              <span className="inline-block mt-2 px-2 py-0.5 bg-purple-50 text-purple-600 rounded text-xs font-semibold">AI</span>
             </a>
           </div>
         </div>
