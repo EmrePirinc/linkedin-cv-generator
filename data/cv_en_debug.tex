@@ -1,0 +1,68 @@
+% ATS-Compatible CV Template - English
+% Compiled with XeLaTeX for Unicode support
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[margin=0.5in]{geometry}
+\usepackage{fontspec}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+\usepackage{parskip}
+
+% Font: TeX Gyre Heros (Arial equivalent, ATS-friendly)
+\setmainfont{TeX Gyre Heros}
+
+% Section formatting - clean, ATS-readable
+\titleformat{\section}{\large\bfseries\uppercase}{}{0em}{}[\titlerule]
+\titlespacing*{\section}{0pt}{8pt}{4pt}
+
+% Tight list spacing
+\setlist[itemize]{nosep, leftmargin=1.5em, label=\textbullet}
+
+% No page numbers (1 page only)
+\pagestyle{empty}
+
+\begin{document}
+
+% ===== CONTACT INFO =====
+\begin{center}
+{\LARGE\bfseries Emre Pirinc}\\[4pt]
+Software Engineer\\[2pt]Istanbul | Turkey\\[2pt]
+LinkedIn: https://www.linkedin.com/in/emre-pirinc\end{center}
+
+% ===== PROFESSIONAL SUMMARY =====
+\section{Professional Summary}
+Experienced software engineer with a passion for building scalable applications and automation systems.
+
+% ===== SKILLS =====
+\section{Skills}
+Python, JavaScript, Docker, Kubernetes, PostgreSQL, React, FastAPI, AWS
+
+% ===== WORK EXPERIENCE =====
+\section{Work Experience}
+\textbf{Senior Software Engineer} \hfill March 2022 -- Present\\
+\textit{Tech Company} -- Istanbul, Turkey\begin{itemize}
+\item Led development of microservices architecture.
+\item Implemented CI/CD pipelines reducing deployment time by 50\%.
+\item Mentored junior developers and conducted code reviews.
+\end{itemize}
+\vspace{4pt}\textbf{Software Engineer} \hfill June 2020 -- February 2022\\
+\textit{Startup Inc} -- Istanbul, Turkey\begin{itemize}
+\item Developed RESTful APIs using Python and FastAPI.
+\item Designed and implemented database schemas.
+\item Collaborated with cross-functional teams.
+\end{itemize}
+
+% ===== EDUCATION =====
+\section{Education}
+\textbf{Istanbul Technical University} \hfill September 2016 -- June 2020\\
+\textit{Bachelor's Degree, Computer Engineering} -- GPA: 3.5
+% ===== CERTIFICATIONS =====
+\section{Certifications}
+\textbf{AWS Solutions Architect} -- Amazon Web Services (January 2023)\\
+
+% ===== LANGUAGES =====
+\section{Languages}
+Turkish, English
+
+\end{document}
