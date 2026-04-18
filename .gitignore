@@ -19,8 +19,13 @@ node_modules/
 *.fdb_latexmk
 *.synctex.gz
 
-# Output PDFs (generated)
-output/*.pdf
+# Output intermediate files (keep PDFs)
+output/*.aux
+output/*.log
+output/*.out
+output/*.fls
+output/*.fdb_latexmk
+output/*.synctex.gz
 
 # Auth tokens (sensitive)
 data/linkedin_token.json
